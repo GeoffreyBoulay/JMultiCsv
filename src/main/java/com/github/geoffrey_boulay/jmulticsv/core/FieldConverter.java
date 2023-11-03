@@ -1,21 +1,26 @@
 package com.github.geoffrey_boulay.jmulticsv.core;
 
-import lombok.Data;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Value;
 import lombok.experimental.Delegate;
 
 import java.lang.reflect.Field;
 import java.util.function.Function;
 
-@Value
 class FieldConverter<T> implements Function<String,T> {
 
+    @Getter
     private final int position;
 
+    @Getter
     private final Field field;
 
     @Delegate
-    private final Function<String,T> delegate;
+    private final Function<String,T> converter;
+
+
+    public FieldConverter(int position, Field field) {
+        this.position = position;
+        this.field = field;
+        this.converter = (Function<String,T>) ConverterFactory.converterOf(field);
+    }
 }

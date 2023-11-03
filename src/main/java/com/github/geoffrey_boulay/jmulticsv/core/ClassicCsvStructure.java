@@ -33,7 +33,7 @@ class ClassicCsvStructure<T> {
                 Column column = field.getAnnotation(Column.class);
                 if (column != null) {
                     field.setAccessible(true);
-                    fieldConverters.add(new FieldConverter(column.position(), field, ConverterFactory.converterOf(field.getType(), column)));
+                    fieldConverters.add(new FieldConverter<>(column.position(), field));
                 }
             }
         }
@@ -41,7 +41,7 @@ class ClassicCsvStructure<T> {
 
     public T convert(String[] values) {
         T result = factory.get();
-        for (FieldConverter fieldConverter : fieldConverters) {
+        for (FieldConverter<?> fieldConverter : fieldConverters) {
             String value = values[fieldConverter.getPosition()];
             Object fieldValue = fieldConverter.apply(value);
             try {

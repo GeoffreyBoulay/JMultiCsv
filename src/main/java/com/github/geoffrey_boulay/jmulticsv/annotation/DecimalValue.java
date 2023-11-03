@@ -7,9 +7,12 @@ import java.lang.annotation.Target;
 
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface Column {
+public @interface DecimalValue {
 
-    int position();
+    String format();
 
-    String[] nullValues() default {""};
+    char decimalSeparator() default '.';
+
+    char decimalGroupingSeparator() default 0;
+
 }

@@ -1,6 +1,7 @@
 package com.github.geoffrey_boulay.jmulticsv.core;
 
 import com.github.geoffrey_boulay.jmulticsv.annotation.Column;
+import com.github.geoffrey_boulay.jmulticsv.annotation.DateValue;
 import com.github.geoffrey_boulay.jmulticsv.annotation.HeaderColumn;
 import lombok.Getter;
 import lombok.ToString;
@@ -95,7 +96,8 @@ class BasicCsvReaderTest {
         @Column(position = 1)
         private long col1;
 
-        @Column(position = 2, format = "yyyyMMdd")
+        @Column(position = 2)
+        @DateValue(format = "yyyyMMdd")
         private Date col2;
 
         private Sub1 sub1;
